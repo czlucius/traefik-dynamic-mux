@@ -1,0 +1,27 @@
+package commands
+
+import (
+	"fmt"
+
+	"czlucius.dev/tmap/dynamic"
+	"czlucius.dev/tmap/sources"
+)
+
+type JSONURLCommand struct{}
+
+// Adheres to the CommandImpl interface
+func (c *JSONURLCommand) Execute(args []string, config *dynamic.Configuration) error {
+	if len(args) < 1 {
+		return fmt.Errorf("JSONURL command requires a URL argument")
+	}
+
+	var jsonURLSource sources.JSONUrlSource = sources.JSONUrlSource{
+		Url: args[0],
+	}
+	_, err := jsonURLSource.PassConfig()
+	if err != nil {
+		return fmt.Errorf("failed to pass config: %w", err)
+	}
+
+	return nil
+}
