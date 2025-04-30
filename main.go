@@ -11,7 +11,11 @@ import (
 )
 
 func main() {
-	app := fiber.New()
+	app := fiber.New(
+		fiber.Config{
+			AppName: "traefik-dynamic-mux",
+		},
+	)
 
 	// Default Muxfile location is /etc/traefik/Muxfile
 	// You can set the Muxfile location using the environment variable MUXFILE
