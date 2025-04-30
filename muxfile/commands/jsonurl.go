@@ -18,10 +18,13 @@ func (c *JSONURLCommand) Execute(args []string, config *dynamic.Configuration) e
 	var jsonURLSource sources.JSONUrlSource = sources.JSONUrlSource{
 		Url: args[0],
 	}
-	_, err := jsonURLSource.PassConfig()
+	remoteConfig, err := jsonURLSource.PassConfig()
 	if err != nil {
 		return fmt.Errorf("failed to pass config: %w", err)
 	}
+
+	// Merge the remote configuration into the existing configuration
+	sources.MergeConfig(config, remoteConfig)
 
 	return nil
 }
