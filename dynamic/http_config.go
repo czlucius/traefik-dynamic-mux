@@ -70,18 +70,33 @@ type Router struct {
 	// Deprecated: Please do not use this field and rewrite the router rules to use the v3 syntax.
 	RuleSyntax    string                     `json:"ruleSyntax,omitempty" toml:"ruleSyntax,omitempty" yaml:"ruleSyntax,omitempty" export:"true"`
 	Priority      int                        `json:"priority,omitempty" toml:"priority,omitempty,omitzero" yaml:"priority,omitempty" export:"true"`
-	TLS           *RouterTLSConfig           `json:"tls,omitempty" toml:"tls,omitempty" yaml:"tls,omitempty" label:"allowEmpty" file:"allowEmpty" kv:"allowEmpty" export:"true"`
+	TLS           interface{}                `json:"tls,omitempty" toml:"tls,omitempty" yaml:"tls,omitempty" label:"allowEmpty" file:"allowEmpty" kv:"allowEmpty" export:"true"`
 	Observability *RouterObservabilityConfig `json:"observability,omitempty" toml:"observability,omitempty" yaml:"observability,omitempty" export:"true"`
 	DefaultRule   bool                       `json:"-" toml:"-" yaml:"-" label:"-" file:"-"`
+}
+
+func (r *Router) GetTLS() *RouterTLSConfig {
+	if r.TLS == nil {
+		return nil
+	}
+	tlsConfig, ok := r.TLS.(*RouterTLSConfig)
+	if !ok {
+		return nil
+	}
+	return tlsConfig
+}
+
+func (r *Router) SetTLS(tlsConfig *RouterTLSConfig) {
+	r.TLS = tlsConfig
 }
 
 // +k8s:deepcopy-gen=true
 
 // RouterTLSConfig holds the TLS configuration for a router.
 type RouterTLSConfig struct {
-	Options      string         `json:"options,omitempty" toml:"options,omitempty" yaml:"options,omitempty" export:"true"`
-	CertResolver string         `json:"certResolver,omitempty" toml:"certResolver,omitempty" yaml:"certResolver,omitempty" export:"true"`
-	Domains      []types.Domain `json:"domains,omitempty" toml:"domains,omitempty" yaml:"domains,omitempty" export:"true"`
+	Options      string       `json:"options,omitempty" toml:"options,omitempty" yaml:"options,omitempty" export:"true"`
+	CertResolver string       `json:"certResolver,omitempty" toml:"certResolver,omitempty" yaml:"certResolver,omitempty" export:"true"`
+	Domains      types.Domain `json:"domains,omitempty" toml:"domains,omitempty" yaml:"domains,omitempty" export:"true"`
 }
 
 // +k8s:deepcopy-gen=true
