@@ -2,6 +2,7 @@ package sources
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"czlucius.dev/tmap/dynamic"
@@ -22,13 +23,18 @@ func (j *JSONUrlSource) PassConfig() (*dynamic.Configuration, error) {
 	}
 	defer resp.Body.Close()
 
+	fmt.Println("JSON URL response status:", resp.Status)
 	var remoteConfig dynamic.Configuration
+	body := resp.Body
 
 	// Parse the JSON response into the dynamic.Configuration struct
-	if err := json.NewDecoder(resp.Body).Decode(&remoteConfig); err != nil {
+	if err := json.NewDecoder(body).Decode(&remoteConfig); err != nil {
+		fmt.Println("Error decoding JSON response:", err)
 		// Handle the error (e.g., log it or return the original config)
 		return nil, err
 	}
+
+	fmt.Println("JSON URL content:", remoteConfig)
 
 	// Return the parsed configuration
 	return &remoteConfig, nil
