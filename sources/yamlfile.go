@@ -1,11 +1,10 @@
 package sources
 
 import (
-	"fmt"
-
-	"czlucius.dev/tmap/dynamic"
 	"io"
 	"os"
+
+	"czlucius.dev/tmap/dynamic"
 	"sigs.k8s.io/yaml"
 )
 
@@ -33,7 +32,6 @@ func (y *YAMLFileSource) PassConfig() (*dynamic.Configuration, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("YAML file content:", config.HTTP.Routers["hd-tls"])
 
 	return &config, nil
 }
