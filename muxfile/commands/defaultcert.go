@@ -13,13 +13,15 @@ type DefaultCertCommand struct{}
 // Adheres to the CommandImpl interface
 func (c *DefaultCertCommand) Execute(args []string, config *dynamic.Configuration) error {
 	if len(args) < 2 {
-		return fmt.Errorf("CertResolver command requires a certificate file and key file")
+		return fmt.Errorf("DefaultCert command requires a certificate file and key file")
 	}
 
 	defaultStore, ok := config.TLS.Stores["default"]
 	if !ok {
 		// Create a default store if it doesn't exist
-		config.TLS.Stores["default"] = tls.Store{}
+		config.TLS.Stores["default"] = tls.Store{
+			DefaultCertificate: &tls.Certificate{},
+		}
 		// defaultStore is actually assigned but undefined (because of the error)
 		defaultStore = config.TLS.Stores["default"]
 	}
