@@ -1,5 +1,5 @@
 # traefik-dynamic-mux
-Combines different Traefik dynamic configurations into a single JSON configuration, which can be used via the `http` provider.
+Combines different Traefik dynamic configurations into a single JSON configuration, which can be used via the `http` provider. Powered by [Fiber](https://github.com/gofiber/fiber).
 
 ## Muxfile
 traefik-dynamic-mux uses a special Dockerfile inspired configuration file to make it easy to modify and alter the configuration.
