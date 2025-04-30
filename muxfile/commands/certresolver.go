@@ -23,15 +23,17 @@ func (c *CertResolverCommand) Execute(args []string, config *dynamic.Configurati
 	}
 
 	// Applies the resolver to all HTTP routers
-	for key, value := range config.HTTP.Routers {
-		if value.GetTLS() != nil && !override {
-			// We do not want to override existing TLS configurations
-			continue
-		}
-		if slices.Contains(value.EntryPoints, args[1]) {
-			config.HTTP.Routers[key].SetTLS(&dynamic.RouterTLSConfig{
-				CertResolver: args[0],
-			})
+	if config.HTTP != nil {
+		for key, value := range config.HTTP.Routers {
+			if value.GetTLS() != nil && !override {
+				// We do not want to override existing TLS configurations
+				continue
+			}
+			if slices.Contains(value.EntryPoints, args[1]) {
+				config.HTTP.Routers[key].SetTLS(&dynamic.RouterTLSConfig{
+					CertResolver: args[0],
+				})
+			}
 		}
 	}
 

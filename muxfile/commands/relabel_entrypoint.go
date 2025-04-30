@@ -16,41 +16,48 @@ func (c *RelabelEntryPointCommand) Execute(args []string, config *dynamic.Config
 
 	// Replace args[0] with args[1] for all entry points
 	// HTTP
-	for key, value := range config.HTTP.Routers {
-		if value.EntryPoints == nil {
-			continue
-		}
-		for i, entryPoint := range value.EntryPoints {
-			if entryPoint == args[0] {
-				value.EntryPoints[i] = args[1]
+	if config.HTTP != nil {
+		for key, value := range config.HTTP.Routers {
+			if value.EntryPoints == nil {
+				continue
 			}
+			for i, entryPoint := range value.EntryPoints {
+				if entryPoint == args[0] {
+					value.EntryPoints[i] = args[1]
+				}
+			}
+			config.HTTP.Routers[key] = value
 		}
-		config.HTTP.Routers[key] = value
 	}
+
 	// TCP
-	for key, value := range config.TCP.Routers {
-		if value.EntryPoints == nil {
-			continue
-		}
-		for i, entryPoint := range value.EntryPoints {
-			if entryPoint == args[0] {
-				value.EntryPoints[i] = args[1]
+	if config.GetTCP() != nil {
+		for key, value := range config.GetTCP().Routers {
+			if value.EntryPoints == nil {
+				continue
 			}
+			for i, entryPoint := range value.EntryPoints {
+				if entryPoint == args[0] {
+					value.EntryPoints[i] = args[1]
+				}
+			}
+			config.TCP.(*dynamic.TCPConfiguration).Routers[key] = value
 		}
-		config.TCP.Routers[key] = value
 	}
 
 	// UDP
-	for key, value := range config.UDP.Routers {
-		if value.EntryPoints == nil {
-			continue
-		}
-		for i, entryPoint := range value.EntryPoints {
-			if entryPoint == args[0] {
-				value.EntryPoints[i] = args[1]
+	if config.UDP != nil {
+		for key, value := range config.UDP.Routers {
+			if value.EntryPoints == nil {
+				continue
 			}
+			for i, entryPoint := range value.EntryPoints {
+				if entryPoint == args[0] {
+					value.EntryPoints[i] = args[1]
+				}
+			}
+			config.UDP.Routers[key] = value
 		}
-		config.UDP.Routers[key] = value
 	}
 
 	return nil
