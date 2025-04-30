@@ -1,0 +1,6 @@
+JSONURL http://localhost:3000/webhooks/traefik/main.json
+YAMLFILE /etc/traefik/config.yml
+RELABEL_ENTRYPOINT web http
+RELABEL_ENTRYPOINT websecure https
+APPLYCERTRESOLVER letsencrypt https [override]
+DEFAULTCERT path/to/cert.crt path/to/cert.key
