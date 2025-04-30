@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 	"sigs.k8s.io/yaml"
 )
 

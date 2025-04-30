@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 )
 
 type RelabelEntryPointCommand struct{}

@@ -1,7 +1,7 @@
 package sources
 
 import (
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 	"github.com/traefik/traefik/v3/pkg/tls"
 )
 

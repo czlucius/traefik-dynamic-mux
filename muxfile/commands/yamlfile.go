@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"czlucius.dev/tmap/dynamic"
-	"czlucius.dev/tmap/sources"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/sources"
 )
 
 type YAMLFileCommand struct{}

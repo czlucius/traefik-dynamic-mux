@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 	"github.com/traefik/traefik/v3/pkg/tls"
 	"github.com/traefik/traefik/v3/pkg/types"
 )

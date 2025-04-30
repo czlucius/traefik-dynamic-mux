@@ -1,4 +1,4 @@
-module czlucius.dev/tmap
+module github.com/czlucius/traefik-dynamic-mux
 
 go 1.23.0
 

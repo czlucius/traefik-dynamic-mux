@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"czlucius.dev/tmap/dynamic"
-	"czlucius.dev/tmap/muxfile/commands"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/muxfile/commands"
 )
 
 /*

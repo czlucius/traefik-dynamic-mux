@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 )
 
 // Define JSONUrlSource as a struct that implements the Source interface

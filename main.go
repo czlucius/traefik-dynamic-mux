@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"czlucius.dev/tmap/dynamic"
-	"czlucius.dev/tmap/muxfile"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/muxfile"
 	"github.com/gofiber/fiber/v2"
 )
 

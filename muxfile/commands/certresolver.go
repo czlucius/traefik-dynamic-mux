@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"slices"
 
-	"czlucius.dev/tmap/dynamic"
+	"github.com/czlucius/traefik-dynamic-mux/dynamic"
 )
 
 type CertResolverCommand struct{}
