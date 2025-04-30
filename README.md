@@ -1,6 +1,11 @@
 # traefik-dynamic-mux
 Combines different Traefik dynamic configurations into a single JSON configuration, which can be used via the `http` provider. Powered by [Fiber](https://github.com/gofiber/fiber).
 
+## Usage
+Draft your `Muxfile` as below, then configure `http://<host>/mux` as the HTTP JSON dynamic configuration. Ensure no other JSON configuration is set. Default port is 9393.
+
+A Docker image for ARM64 and AMD64 is also available at `czlucius/traefik-dynamic-mux`.
+
 ## Muxfile
 traefik-dynamic-mux uses a special Dockerfile inspired configuration file to make it easy to modify and alter the configuration.
 The `Muxfile` defines the configuration. It has a very simple syntax, `COMMAND arg0, arg1, ...`
