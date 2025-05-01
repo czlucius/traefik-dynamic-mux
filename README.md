@@ -6,6 +6,10 @@ Draft your `Muxfile` as below, then configure `http://<host>/mux` as the HTTP JS
 
 A Docker image for ARM64 and AMD64 is also available at `czlucius/traefik-dynamic-mux`.
 
+> [!NOTE]
+> If you run it on Docker, make sure that the URLs are accessible from the container.   
+> e.g. using `172.17.0.1` instead of `localhost`
+
 ## Muxfile
 traefik-dynamic-mux uses a special Dockerfile inspired configuration file to make it easy to modify and alter the configuration.
 The `Muxfile` defines the configuration. It has a very simple syntax, `COMMAND arg0, arg1, ...`
@@ -31,24 +35,24 @@ Each line of a `Muxfile` is for a command, which has this structure:
 COMMAND arg0, arg1, ....
 ```
 
-- `JSONURL <url>`
+- `JSONURL <url>`  
 Pulls JSON configuration from the specified URL.
 e.g. `JSONURL http://localhost:3000/webhooks/traefik/main.json`
 
-- `YAMLFILE <path>`
+- `YAMLFILE <path>`  
 Pulls YAML configuration from the specified path.
 e.g. `YAMLFILE /etc/traefik/config1.yml`
 
-- `APPLYCERTRESOLVER <certresolver name> <entrypoint> [override]`
+- `APPLYCERTRESOLVER <certresolver name> <entrypoint> [override]`  
 Applies certresolver for all routes with specified entrypoint.
 The 3rd argument is optional and accepts a literal string `override`, which will override existing certresolvers if they are present, else it will remain unchanged.
 e.g. `APPLYCERTRESOLVER letsencrypt websecure override`
 
-- `RELABEL_ENTRYPOINT <from> <to>`
+- `RELABEL_ENTRYPOINT <from> <to>`  
 Renames entrypoint from `<from>` to `<to>`
 e.g. `RELABEL_ENTRYPOINT https websecure`
 
-- `DEFAULTCERT <certfile> <keyfile>`
+- `DEFAULTCERT <certfile> <keyfile>`  
 Applies a default certificate.
 
 
